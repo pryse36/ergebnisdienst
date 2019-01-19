@@ -5,9 +5,9 @@ require_once('database.php');
 require_once('get_table.php');
 require_once('simple_html_dom.php');
 
-if(!isset($_GET['action'])) die('No action defined.');
-else $action = $_GET['action'];
-
+//if(!isset($_GET['action']))die('No action defined.');
+//else $action = $_GET['action'];
+$action = 'parse';
 switch ($action) {
   case 'parse':
     echo "Updating league table...<br>\n";
@@ -25,20 +25,20 @@ switch ($action) {
     // NEU
     echo "Updating Results...<br>\n";
     $results = get_table::GetResults('https://www.fupa.net/liga/freiburg-kreisliga-b2/spielplan');
- /*   foreach($results as $row){
+    foreach($results as $v => $row){
 
         $insert = $mysqli->query("INSERT INTO ergebnisse(datum, ergebnis_heim, ergebnis_gast,liga,saison,spieltag, team_gast,team_heim) "
                 . "values ('".$row['datum']."', '".$row['ergebnis_heim']."', '".$row['ergebnis_gast']."', '".$row['liga']."', '".$row['saison']."', '".$row['spieltag']."', '".$row['team_gast']."', '".$row['team_heim']."')");
-     /*   if(!$insert){ //No row was affected (probably duplicate unique) -> Update
+       if(!$insert){ //No row was affected (probably duplicate unique) -> Update
             $update = $mysqli->query("UPDATE ergebnisse SET ergebnis_heim= '".$row['ergebnis_heim']."',ergebnis_gast= '".$row['ergebnis_gast']."', liga= '".$row['liga']."', saison= '".$row['saison']."', spieltag= '".$row['spieltag']."', team_gast= '".$row['team_gast']."', team_heim= '".$row['team_heim'].""
                     . "where liga= '".$row['liga']."' and saison= '".$row['saison']." and spieltag= '".$row['spieltag']."' " );
-        if(!$update) echo "Es ist ein Fehler aufgetreten (Team: ".$row['team'].")<br>\n";
-        elseif(!mysqli_affected_rows($mysqli)) echo " Untouched ".$row['team']."<br>\n";
-        else echo " Updated ".$row['team']."<br>\n";
-      } else echo " Inserted ".$row['team']."<br>\n";
+        if(!$update) echo "Es ist ein Fehler aufgetreten (Team: ".$row['spieltag'].")<br>\n";
+        elseif(!mysqli_affected_rows($mysqli)) echo " Untouched ".$row['spieltag']."<br>\n";
+        else echo " Updated ".$row['spieltag']."<br>\n";
+      } else echo " Inserted ".$row['spieltag']."<br>\n";
         
        
-    }*/
+    }
     
     echo "Done.<br>\n";
     break;

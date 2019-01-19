@@ -29,7 +29,6 @@ class get_table {
         require_once(BASEDIR . '/simple_html_dom.php');
         $html_results = new simple_html_dom();
         $html_results->load_file($url);
-//td[class^=liga_spielplan_container]
         $datum = "";
         $spieltag = "";
         $heim = "";
@@ -39,8 +38,9 @@ class get_table {
         $results = array();
         foreach ($html_results->find("table[class=content_table_std]") as $table) {
 //  Spieltag holen
-            $spieltag = $table->find("th", 0)->plaintext;
-
+            $tmp_sp = $table->find("th", 0)->plaintext;
+        preg_match("/(\\d+)/",$tmp_sp,$matches);
+        $spieltag = $matches[0];
             foreach ($table->find("td[class=liga_spielplan_container] ") as $row) {
                 $heim = $row->find("div[class=liga_spieltag_vorschau_heim_content]", 0)->plaintext;
                 $gast = $row->find("div[class=liga_spieltag_vorschau_gast_content]", 0)->plaintext;
@@ -65,6 +65,7 @@ class get_table {
                 );
             }
         }
+
 
         return $results;
     }
