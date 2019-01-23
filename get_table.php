@@ -52,7 +52,9 @@ class get_table {
                     $erg_heim = $row->find("span[class=liga_spieltag_vorschau_datum_content_ergebnis_heim]", 0)->plaintext;
                     $erg_gast = $row->find("span[class=liga_spieltag_vorschau_datum_content_ergebnis_gast]", 0)->plaintext;
                 }
-
+                // Noch ein paar unnötige Zeichen entfernen
+                 $heim = str_replace("\t","",$heim);
+                 $gast = str_replace("\t","",$gast);
                 $results[] = array(
                     'liga' => "Kreisliga B2",
                     'saison' => "2018/19",
